@@ -41,7 +41,7 @@ EUROCUP_YEARS_AND_TABLES = [
     },
     {
         'year': 2012,
-        'tables': [19, 26, 33, 40]
+        'tables': [19, 26, 32, 39]
     },
     {
         'year': 2016,
