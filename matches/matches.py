@@ -42,3 +42,13 @@ def get_match(year) -> pd.DataFrame:
     df = pd.DataFrame(dict_matches)
     df['year'] = year
     return df
+
+def format_score(file_name) -> None:
+    print('Cleaning score format...')
+    df = pd.read_csv(file_name)
+    
+    df['score'] = df['score'].str.replace('[^\\d-]', '', regex=True)
+    df[['home_score', 'away_score']] = df['score'].str.split('-', expand=True)
+    df.pop('score')
+    df = df.astype({'home_score': int, 'away_score': int, 'year': int})
+    df.to_csv(file_name, index=False)
