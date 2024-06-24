@@ -5,7 +5,6 @@ from resources.constants import BASE_URL, EUROCUP_YEARS_AND_TABLES
 
 
 def get_past_matches(file_name) -> None:
-    print('Getting past matches info...')
     years = map(lambda x: x['year'], EUROCUP_YEARS_AND_TABLES)
 
     list_df_matches = []

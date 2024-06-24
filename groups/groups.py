@@ -1,40 +1,25 @@
 import pandas as pd
 import pickle
 from string import ascii_uppercase
-from resources.constants import BASE_URL, EUROCUP_YEARS_AND_TABLES
+from resources.constants import BASE_URL, EUROCUP_YEARS_AND_TABLES, CURRENT_EUROCUP_GROUPS
 
-def get_past_groups(file_name) -> None:
-    print('Getting past groups info...')
-
-    past_group_info = []
-    for eurocup_info in EUROCUP_YEARS_AND_TABLES:
-        year = eurocup_info['year']
-        tables = eurocup_info['tables']
-
-        group_info = get_group(year, tables)
-    
-        past_group_info.append(group_info)
-    
-    with open(file_name, 'wb') as f:
-        pickle.dump(past_group_info, f)
-    
-    print(f'Past groups info saved in {file_name}')
 
 def get_group(year, tables) -> dict:
     print(f'Getting groups info for {year}...')
-    group_info = {}
-    group_info['year'] = year
     all_tables = pd.read_html(BASE_URL + str(year))
-
-    group_info['tables'] = [] 
+ 
+    group_info = {}
     for letter, table in zip(ascii_uppercase, tables):
-        table_info = {}
-        table_info['name'] = 'Group ' + letter
-        
-        df = all_tables[table]
-        df.pop('Qualification')
+        table_info = all_tables[table]
+        table_info.rename(columns={table_info.columns[1]:'Team'}, inplace=True)
+        table_info['Team'] = table_info['Team'].str.replace(' \\([a-zA-Z]\\)', '', regex=True)
+        table_info.pop('Qualification')
 
-        table_info['info'] = df
-        group_info['tables'].append(table_info)
+        group_info[f'Group {letter}'] = table_info
     
     return group_info
+
+def get_current_groups(filename) -> dict:
+    group_info = get_group(CURRENT_EUROCUP_GROUPS['year'], CURRENT_EUROCUP_GROUPS['tables'])
+
+    pickle.dump(group_info, open(filename, 'wb'))

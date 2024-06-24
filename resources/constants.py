@@ -48,3 +48,8 @@ EUROCUP_YEARS_AND_TABLES = [
         'tables': [22, 29, 36, 43, 50, 57]
     }
 ]
+
+CURRENT_EUROCUP_GROUPS = {
+    'year': 2024,
+    'tables': [20, 27, 34, 41, 48, 55]
+}
