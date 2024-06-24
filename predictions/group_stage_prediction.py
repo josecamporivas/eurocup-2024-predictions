@@ -1,5 +1,4 @@
 import pandas as pd
-import pickle
 from predictions.match_prediction import predict_points
 
 def get_group_stage_prediction(team_strength, dict_table):

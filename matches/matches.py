@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import requests
 from resources.constants import BASE_URL, EUROCUP_YEARS_AND_TABLES
 
-
 def get_past_matches(file_name) -> None:
     years = map(lambda x: x['year'], EUROCUP_YEARS_AND_TABLES)
 

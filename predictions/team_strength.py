@@ -1,7 +1,4 @@
 import pandas as pd
-import pickle
-from scipy.stats import poisson
-
 
 def get_team_strength(filename_past_matches):
     df_historical_data = pd.read_csv(filename_past_matches)

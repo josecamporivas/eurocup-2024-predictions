@@ -1,8 +1,7 @@
 import pandas as pd
 import pickle
 from string import ascii_uppercase
-from resources.constants import BASE_URL, EUROCUP_YEARS_AND_TABLES, CURRENT_EUROCUP_GROUPS
-
+from resources.constants import BASE_URL, CURRENT_EUROCUP_GROUPS
 
 def get_group(year, tables) -> dict:
     print(f'Getting groups info for {year}...')
